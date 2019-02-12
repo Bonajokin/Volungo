@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Animated Vertical Carousel</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<style>
+       
+        /*--------------------------------------- basic ---------------------------------------*/
+		html, body{
+			width:100%;
+			height:100%;
+			background-color:#fff;
+			font-family: 'Sansita', sans-serif;
+		}
+		.carousel-inner,.slide,.item,.container,.fill {
+		  height:100%;
+		  width:100%;
+		  max-width:100%;
+		  background-position:center center;
+		  background-size:cover;
+		}
+		.slide-wrapper{display:inline;}
+		.slide-wrapper .container{padding:0px;}
+        
+        .snapshot {
+            padding: 20px 20px 60px;
+            background: #fff;
+            border: 1px solid #fff;
+        }
+        
+        /*--- search bar ---*/
+    	.form-inline {
+        	position: absolute;
+        	top: 10px;
+			left: 10px;
+    	}
+    	.form-control, .btn-light {
+  			background-color: rgba(255,255,255,.5) !important;
+  			border: none !important;
+        }   
+
+        
+        /*------------------------------ Vertical Carousel ----------------------------*/
+
+		/*--- vertical carousel movement ---*/
+		.carousel-inner> .item.next ,  .carousel-inner > .item.active.right{ 
+  			transform: translateY(100%);
+            -webkit-transform: translateY(100%);
+            -ms-transform: translateY(100%);
+            -moz-transform: translateY(100%);
+            -o-transform: translateY(100%);
+   			top: 0;left:0;
+         }
+		.carousel-inner > .item.prev ,.carousel-inner > .item.active.left{ 
+  			transform: translateY(-100%);
+            -webkit-transform: translateY(-100%);
+            -moz-transform: translateY(-100%);
+            -ms-transform: translateY(-100%);
+            -o-transform: translateY(-100%);
+  			top: 0;
+  			left:0;
+        }
+		.carousel-inner > .item.next.left , .carousel-inner > .item.prev.right , .carousel-inner > .item.active {
+  			transform:translateY(0);
+            -webkit-transform:translateY(0);
+            -ms-transform:translateY(0);
+            -moz-transform:translateY(0);
+            -o-transform:translateY(0);
+  			top:0;
+  			left:0;
+        }
+
+		/*--- vertical carousel indicators ---*/
+		.carousel-indicators {
+  			position:absolute;
+  			top:0;
+  			bottom:0;
+  			margin:auto;
+  			height:20px;
+			right:10px;
+  			left:auto;
+  			width:auto;
+		}
+		.carousel-indicators li {
+  			display:block;
+  			margin-bottom:5px;
+  			border:1px solid #00a199;
+        }
+		.carousel-indicators li.active {
+  			margin-bottom:5px;
+  			background:#00a199;
+        }
+        
+		/*--- vertical carousel animations ---*/
+		.animated {
+			animation-duration:3s;
+			-webkit-animation-duration:3s;
+			-moz-animation-duration:3s;
+			-ms-animation-duration:3s;
+			-o-animation-duration:3s;
+			visibility:visible;
+			opacity:1;
+			transition:all 0.3s ease;
+		}
+		.carousel-img {   
+			display: inline-block;
+			margin: 0 auto;
+			width: 100%;
+			text-align: center;
+		}
+		.item img, h1 {
+  			margin:auto;visibility:hidden;
+  			opacity:0;
+  			transition:all 0.3s ease;
+            -webkit-transition:all 0.3s ease;
+            -moz-transition:all 0.3s ease;
+            -ms-transition:all 0.3s ease;
+            -o-transition:all 0.3s ease;
+        }
+		.item1 .carousel-img img , .item1.active .carousel-img img {
+            max-height:3000px;
+        }
+		.item1.active .carousel-img img.animated {
+  			visibility:visible; 
+  			opacity:1; 
+  			transition:all 1s ease; 
+            -webkit-transition:all 1s ease; 
+            -moz-transition:all 1s ease; 
+            -ms-transition:all 1s ease; 
+            -o-transition:all 1s ease;
+  			animation-duration:2s; 
+            -webkit-animation-duration:2s; 
+            -moz-animation-duration:2s; 
+            -ms-animation-duration:2s; 
+            -o-animation-duration:2s; 
+  			animation-delay:0.3s ; 
+            -webkit-animation-delay:0.3s;
+            -moz-animation-delay:0.3s;
+            -ms-animation-delay:0.3s; 
+        }
+		.item .carousel-desc {
+  			color:#fff;
+  			text-align:center;
+        }
+		.item .carousel-form {
+  			animation-delay:.2s;
+            animation-duration:.8s;
+        }
+		.item  h1 {
+  			font-size: 130px;
+  			animation-duration:1s;
+        }
+		.item  h2 {
+  			font-size:50px;
+  			animation-delay:1.5s;
+            animation-duration:1s;
+        }
+		.item  p {
+  			animation-delay:2.5s;
+            animation-duration:1s;
+  			width:50%;
+  			margin:auto;
+        }
+		.item2 .carousel-img img , .item2.active .carousel-img img {
+            max-height:3000px;
+            left: 0;
+            top: 20%;
+            z-index: 0;
+            width: 120%;
+            position: absolute;
+        }
+		.item2.active .carousel-img img.animated {
+  			visibility:visible;
+  			z-index: 0;
+            opacity:1;
+            transition:all 0.3s ease;
+  			animation-duration:1.5s;
+  			animation-delay:0.3s
+        }
+		.item2 h2 , item2.active h2 {
+  			visibility:hidden;
+  			opacity:0;
+  			transition:all 5s ease;
+        }
+		.item2.active h2.animated {
+  			visibility:visible;
+  			opacity:1;
+  			animation-delay:3s;
+        }
+		.item .fill {
+  			padding:0px 30px;
+  			display:table;
+        }
+		.item .inner-content {
+  			display: table-cell;
+  			vertical-align: top;
+        }
+		.item3 .col-md-6 {
+  			float:none;
+  			display:inline-block;
+  			vertical-align:middle;
+  			width:49%;
+        }
+		.item3.active .carousel-img img.animated {
+  			visibility:visible;
+  			opacity:1;
+  			transition:all 0.3s ease;
+  			animation-duration:2s;
+  			animation-delay:0.3s
+        }
+		.item3 h2 , item3.active h2 {
+  			visibility:hidden;
+  			opacity:0;
+  			transition:all 2s ease;
+        }
+		.item.item3 .carousel-desc {text-align:center;}
+		.item3.active h2.animated {
+  			visibility:visible;
+  			opacity:1;
+  			animation-delay:0.5s
+        }
+		.item3 p , item3.active p {
+  			visibility:hidden;
+  			opacity:0;
+  			transition:all 2s ease;
+  			width:100%;
+        }
+		.item3.active p.animated {
+  			visibility:visible;
+  			opacity:1;
+  			animation-delay:1s;
+        }
+		@media(max-width:991px) {
+			.item .carousel-desc , .item.item3 .carousel-desc{text-align:center;}
+			.item .carousel-desc p {width:80%;}
+			.item3 .col-md-6{width:100%; text-align:center;}
+		}
+		@media(max-width:768px) {
+			.item .carousel-img img, .item.active .carousel-img img{max-height:155px;}
+			.item  h2{font-size:30px; margin-top:0px;}
+			.item .carousel-desc p{width:100%; font-size:12px;}
+		}
+		@media(max-width:480px) {
+			.item  h2{font-size:30px;}
+			.item .carousel-desc p{width:100%;}
+		}
+        
+             
+        
+        
+        /*----------------------------------- Forms --------------------------------------*/
+        a {
+			color: #aaa;
+			transition: all ease-in-out 200ms;
+        }
+
+        /*--- Main Form ---*/
+        .toggle {
+			padding: 0;
+			font-size: 25px;
+			color: #aaaaaa;
+			font-weight: bold;
+			width: 100%;
+        }
+        .toggle .btn {
+			background-color: #fff;
+        }
+        .toggle .btn:hover {
+			color: #ff694f;
+        }
+        .toggle .active {
+			background-color: #ff694f;
+			color: #fff;
+        }
+        .login-form-1 {
+			max-width: 300px;
+			border-radius: 5px;
+			display: inline-block;
+        }
+        .main-login-form {
+			position: relative;
+        }
+        .login-form-1 .form-control {
+			border: 0;
+			box-shadow: 0 0 0;
+			border-radius: 0;
+			background: transparent;
+			color: #555555;
+			padding: 7px 0;
+			font-weight: bold;
+			height:auto;
+        }
+        .login-form-1 .form-control::-webkit-input-placeholder {
+			color: #999999;
+        }
+        .login-form-1 .form-control:-moz-placeholder,
+        .login-form-1 .form-control::-moz-placeholder,
+        .login-form-1 .form-control:-ms-input-placeholder {
+			color: #999999;
+        }
+        .login-form-1 .form-group {
+			margin-bottom: 0;
+			border-bottom: 2px solid #efefef;
+			padding-right: 20px;
+			position: relative;
+        }
+        .login-form-1 .form-group:last-child {
+			border-bottom: 0;
+        }
+        .login-group {
+			background: #ffffff;
+			color: #999999;
+			border-radius: 8px;
+			padding: 10px 20px;
+        }
+        .login-group-checkbox {
+			padding: 5px 0;
+        }
+        /*--- Login Button ---*/
+        .login-form-1 .login-button {
+			position: absolute;
+			right: -25px;
+			top: 50%;
+			background: #ffffff;
+			color: #999999;
+			padding: 11px 0;
+			width: 50px;
+			height: 50px;
+			margin-top: -25px;
+			border: 5px solid #efefef;
+			border-radius: 50%;
+			transition: all ease-in-out 500ms;
+        }
+        .login-form-1 .login-button:hover {
+			color: #ff694f;
+			transform: rotate(450deg);
+        }
+        .login-form-1 .login-button.clicked {
+			color: #ff694f;
+        }
+        .login-form-1 .login-button.clicked:hover {
+			transform: none;
+        }
+        .login-form-1 .login-button.clicked.success {
+			color: #2ecc71;
+        }
+        .login-form-1 .login-button.clicked.error {
+			color: #e74c3c;
+        }
+        /*--- Form Invalid ---*/
+        label.form-invalid {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 5;
+			display: block;
+			margin-top: -25px;
+			padding: 7px 9px;
+			background: #777777;
+			color: #ffffff;
+			border-radius: 5px;
+			font-weight: bold;
+			font-size: 11px;
+			transition: all .1s ease-in 1000s;
+        }
+        label.form-invalid:hover {
+			background-color: rgba(0,0,0,0);
+			color: rgba(0,0,0,0);
+			transition: all .1s ease-out;
+        }
+        label.form-invalid:after {
+			top: 100%;
+			right: 10px;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+			border-color: transparent;
+			border-top-color: #777777;
+			border-width: 6px;
+        }
+        /*--- Form - Main Message ---*/
+        .login-form-main-message {
+			background: #ffffff;
+			color: #999999;
+			border-left: 3px solid transparent;
+			border-radius: 3px;
+			margin-bottom: 8px;
+			font-weight: bold;
+			height: 0;
+			padding: 0 20px 0 17px;
+			opacity: 0;
+			transition: all ease-in-out 200ms;
+        }
+        .login-form-main-message.show {
+			height: auto;
+			opacity: 1;
+			margin-top: 10px;
+			padding: 10px 20px 10px 17px;
+        }
+        .login-form-main-message.success {
+			border-left-color: #2ecc71;
+        }
+        .login-form-main-message.error {
+			border-left-color: #e74c3c;
+        }
+        /*--- Custom Checkbox & Radio ---*/
+        /* Base for label styling */
+        [type="checkbox"]:not(:checked),
+        [type="checkbox"]:checked,
+        [type="radio"]:not(:checked),
+        [type="radio"]:checked {
+			position: absolute;
+			left: -9999px;
+        }
+        [type="checkbox"]:not(:checked) + label,
+        [type="checkbox"]:checked + label,
+        [type="radio"]:not(:checked) + label,
+        [type="radio"]:checked + label {
+			position: relative;
+			padding-left: 25px;
+			padding-top: 1px;
+			cursor: pointer;
+        }
+        /* checkbox aspect */
+        [type="checkbox"]:not(:checked) + label:before,
+        [type="checkbox"]:checked + label:before,
+        [type="radio"]:not(:checked) + label:before,
+        [type="radio"]:checked + label:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 2px;
+			width: 17px;
+			height: 17px;
+			border: 0px solid #aaa;
+			background: #f0f0f0;
+			border-radius: 3px;
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        /* checked mark aspect */
+        [type="checkbox"]:not(:checked) + label:after,
+        [type="checkbox"]:checked + label:after,
+        [type="radio"]:not(:checked) + label:after,
+        [type="radio"]:checked + label:after {
+			position: absolute;
+			color: #555555;
+			transition: all .2s;
+        }
+        /* checked mark aspect changes */
+        [type="checkbox"]:not(:checked) + label:after,
+        [type="radio"]:not(:checked) + label:after {
+			opacity: 0;
+			transform: scale(0);
+        }
+        [type="checkbox"]:checked + label:after,
+        [type="radio"]:checked + label:after {
+			opacity: 1;
+			transform: scale(1);
+        }
+        /* disabled checkbox */
+        [type="checkbox"]:disabled:not(:checked) + label:before,
+        [type="checkbox"]:disabled:checked + label:before,
+        [type="radio"]:disabled:not(:checked) + label:before,
+        [type="radio"]:disabled:checked + label:before {
+			box-shadow: none;
+			border-color: #8c8c8c;
+			background-color: #878787;
+        }
+        [type="checkbox"]:disabled:checked + label:after,
+        [type="radio"]:disabled:checked + label:after {
+			color: #555555;
+        }
+        [type="checkbox"]:disabled + label,
+        [type="radio"]:disabled + label {
+			color: #8c8c8c;
+        }
+        /* accessibility */
+        [type="checkbox"]:checked:focus + label:before,
+        [type="checkbox"]:not(:checked):focus + label:before,
+        [type="checkbox"]:checked:focus + label:before,
+        [type="checkbox"]:not(:checked):focus + label:before {
+			border: 1px dotted #f6f6f6;
+        }
+        /* hover style just for information */
+        label:hover:before {
+			border: 1px solid #f6f6f6 !important;
+        }
+        /*--- Customization ---*/
+        /* radio aspect */
+        [type="checkbox"]:not(:checked) + label:before,
+        [type="checkbox"]:checked + label:before {
+			border-radius: 3px;
+        }
+        [type="radio"]:not(:checked) + label:before,
+        [type="radio"]:checked + label:before {
+			border-radius: 35px;
+        }
+        /* selected mark aspect */
+        [type="checkbox"]:not(:checked) + label:after,
+        [type="checkbox"]:checked + label:after {
+			content: '✔';
+			top: 0;
+			left: 2px;
+			font-size: 14px;
+        }
+        [type="radio"]:not(:checked) + label:after,
+        [type="radio"]:checked + label:after {
+			content: '\2022';
+			top: 0;
+			left: 3px;
+			font-size: 30px;
+			line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <section class="slide-wrapper">
+        <div class="container">
+            <div id="myCarousel" class="carousel slide">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                 </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item item1 active">
+                        <div class="fill" style=" background-image: url('https://i.imgur.com/501hRUZ.png');">
+                            <div class="inner-content">
+                            	<div class="carousel-search">
+                                  <form class="form-inline" role="search">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control" size="30" placeholder="school, kitchen, veterans, homeless" required>
+                                      <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-light"><span class="glyphicon glyphicon-search"></span></button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="carousel-desc">
+                                    <br><br>
+                                	<h1>Volungo!</h1>
+                                </div>
+                                <!-- LOGIN FORM -->
+                                <div class="carousel-form text-center" style="padding:50px 0">
+                                    <!-- Main Form -->
+                                    <div class="login-form-1">
+                                        <div class="toggle">
+                                            <div class="btn-group btn-group-justified">
+                                                <a href="#" class="btn btn-lg active" id="login-form-link">Login</a>
+                                                <a href="#" class="btn btn-lg" id="register-form-link">Register</a>
+                                            </div>
+                                        </div>
+                                        <form id="login-form" class="text-left">
+                                            <div class="login-form-main-message"></div>
+                                            <div class="main-login-form">
+                                                <div class="login-group">
+                                                    <div class="form-group">
+                                                        <label for="lg_username" class="sr-only">Username</label>
+                                                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lg_password" class="sr-only">Password</label>
+                                                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
+                                                    </div>
+                                                    <div class="form-group login-group-checkbox">
+                                                        <input type="checkbox" id="lg_remember" name="lg_remember">
+                                                        <label for="lg_remember">remember</label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                                            </div>
+                                        </form>
+
+                                    {% block javascript %}
+                                      <script>
+                                        $("#id_username").change(function () {
+                                          console.log( $(this).val() );
+                                        });
+                                      </script>
+                                    {% endblock %}
+
+                                        <form id="register-form" class="text-left" action="/user/register/" method="POST"  style="display: none;">
+                                          {%  block content  %}
+                                            {% csrf_token %}
+
+
+
+                                            {% endblock %}
+                                            <div class="login-form-main-message"></div>
+                                            <div class="main-login-form">
+                                                <div class="login-group">
+                                                    <div class="form-group">
+                                                        <label for="reg_username" class="sr-only">Username</label>
+
+                                                     {{ form.username }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="reg_password" class="sr-only">Password</label>
+
+
+                                                        {{ form.password }}
+
+                                                        {{ form.last_name }}
+
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="reg_password_confirm" class="sr-only">Password Confirm</label>
+                                                        <input type="password" class="form-control" id="id_password2" name="reg_password_confirm" placeholder="confirm password">
+
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="reg_email" class="sr-only">Email</label>
+
+                                                        {{ form.email }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="reg_fullname" class="sr-only">Full Name</label>
+                                                        {{ form.firstname }}
+                                                    </div>
+                                                    
+                                                    <div class="form-group login-group-checkbox">
+                                                        <input type="radio" class="" name="reg_gender" id="male" placeholder="username">
+                                                        <label for="male">male</label>
+                                                        
+                                                        <input type="radio" class="" name="reg_gender" id="female" placeholder="username">
+                                                        <label for="female">female</label>
+                                                    </div>
+                                                    
+                                                    <div class="form-group login-group-checkbox">
+                                                        <input type="checkbox" class="" id="reg_agree" name="reg_agree">
+                                                        <label for="reg_agree">i agree with <a href="#">terms</a></label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- end:Main Form -->
+                                </div>                                
+                                <div class="carousel-desc">
+                                    <p>Some blurb here.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item2">
+                        <div class="fill" style="background-color:#9bf2d2;">
+                            <div class="inner-content">
+                                <div class="carousel-img">
+                                    <img src="https://i.imgur.com/pORd4X4.png" alt="we-need-you" class="img img-responsive"/>
+                                </div>
+                                <div class="carousel-desc">
+
+                                    <h2>Who We Are</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit ipsum, scelerisque non semper eu, aliquet vel odio. Sed auctor id purus nec tristique. Donec euismod, urna vel dapibus tristique, dolor arcu ultrices lectus, nec pulvinar est turpis sit amet felis. Duis interdum purus quam, vitae cursus erat ornare at. Donec congue mi a ipsum tincidunt, imperdiet vehicula odio rutrum. Nam porta vulputate magna, id pretium lectus iaculis eu. Ut ut viverra libero.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item3">
+                        <div class="fill" style="background-color:#7fc2f4;">
+                            <div class="inner-content">
+                                <div class="carousel-desc">
+
+                                    <h2>Contact Us</h2>
+                                    
+                                    <div class="row">
+                                        
+                                            <p><span class="glyphicon glyphicon-map-marker"></span> Lafayette, LA</p>
+                                            <p><span class="glyphicon glyphicon-phone"></span> Phone: +00 1515151515</p>
+                                            <p><span class="glyphicon glyphicon-envelope"></span> Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="721f131b1e321f131b1e5c111d1f">[email&#160;protected]</a></p> 
+                                        <br>
+                                        <div class="container" style="max-width: 500px">
+                                            <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                                            </div>
+                                            </div>
+                                            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <button class="btn pull-right" type="submit">Send</button>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/cdn-cgi/scripts/0e574bed/cloudflare-static/email-decode.min.js"></script><script>
+        /*------------------------------------------- Carousel -------------------------------------------*/   
+		$(document).ready(function(){
+			// invoke the carousel
+			$('#myCarousel').carousel({
+			  interval: false
+			});
+
+			// scroll slides on mouse scroll 
+			$('#myCarousel').bind('mousewheel DOMMouseScroll', function(e){
+
+				if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+					$(this).carousel('prev');
+					
+					
+				}
+				else{
+					$(this).carousel('next');
+					
+				}
+			});
+
+			//scroll slides on swipe for touch enabled devices 
+
+			$("#myCarousel").on("touchstart", function(event){
+		 
+				var yClick = event.originalEvent.touches[0].pageY;
+				$(this).one("touchmove", function(event){
+
+					var yMove = event.originalEvent.touches[0].pageY;
+					if( Math.floor(yClick - yMove) > 1 ){
+						$(".carousel").carousel('next');
+					}
+					else if( Math.floor(yClick - yMove) < -1 ){
+						$(".carousel").carousel('prev');
+					}
+				});
+				$(".carousel").on("touchend", function(){
+						$(this).off("touchmove");
+				});
+			});
+			
+		});
+        
+		/*------------------------------------------- Animations -------------------------------------------*/   
+		$(document).ready(function(){
+
+			//to add  start animation on load for first slide 
+			$(function(){
+				$.fn.extend({
+					animateCss: function (animationName) {
+						var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+						this.addClass('animated ' + animationName).one(animationEnd, function() {
+							$(this).removeClass(animationName);
+						});
+					}
+				});
+					 $('.item1.active .carousel-form').animateCss('fadeInUp');
+					 $('.item1.active h1').animateCss('bounceInDown');
+					 $('.item1.active p').animateCss('fadeIn');
+					 
+			});
+			
+			//to start animation on  mousescroll , click and swipe
+            $("#myCarousel").on('slide.bs.carousel', function () {
+				$.fn.extend({
+					animateCss: function (animationName) {
+						var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+						this.addClass('animated ' + animationName).one(animationEnd, function() {
+							$(this).removeClass(animationName);
+						});
+					}
+				});
+			
+			// add animation type  from animate.css on the element which you want to animate
+
+				$('.item1.active .carousel-form').animateCss('fadeInUp');
+				$('.item1 h1').animateCss('bounceInDown');
+				$('.item1 p').animateCss('fadeIn');
+				
+				$('.item2 img').animateCss('bounceInDown');
+				$('.item2 h2').animateCss('swing');
+				$('.item2 p').animateCss('fadeIn');
+				
+				$('.item3 img').animateCss('fadeInLeft');
+				$('.item3 h2').animateCss('fadeInDown');
+				$('.item3 p').animateCss('fadeIn');
+			});
+		});
+
+        
+    /*------------------------------------------- Forms -------------------------------------------*/    
+ 	(function($) {
+		"use strict";
+		
+        
+        $('#login-form-link').click(function(e) {
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $(this).addClass('active');
+  			e.preventDefault();
+        });
+        $('#register-form-link').click(function(e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $(this).addClass('active');
+  			e.preventDefault();
+        });
+        
+		// Options for Message
+		//----------------------------------------------
+		var options = {
+		  'btn-loading': '<i class="fa fa-spinner fa-pulse"></i>',
+		  'btn-success': '<i class="fa fa-check"></i>',
+		  'btn-error': '<i class="fa fa-remove"></i>',
+		  'msg-success': 'All Good! Redirecting...',
+		  'msg-error': 'Wrong login credentials!',
+		  'useAJAX': true,
+		};
+
+		// Login Form
+		//----------------------------------------------
+		// Validation
+		$("#login-form").validate({
+			rules: {
+			  lg_username: "required",
+			  lg_password: "required",
+			},
+			errorClass: "form-invalid"
+		});
+	  
+		// Form Submission
+		$("#login-form").submit(function() {
+			remove_loading($(this));
+			
+			if(options['useAJAX'] == true) {
+				// Dummy AJAX request (Replace this with your AJAX code)
+			    dummy_submit_form($(this));
+
+				// Cancel the normal submission.
+				return false;
+			}
+		});
+
+		// Register Form
+		//----------------------------------------------
+		// Validation
+		$("#register-form").validate({
+  			rules: {
+      			username: "required",
+      			password: {
+          			required: true,
+          			minlength: 5
+                },
+      			reg_password_confirm: {
+          			required: true,
+          			minlength: 5,
+          			equalTo: "#register-form [name=password]"
+                },
+      			email: {
+      			required: true,
+          			email: true
+
+                },
+      			reg_agree: "required",
+            },
+		    errorClass: "form-invalid",
+		    errorPlacement: function( label, element ) {
+      			if( element.attr( "type" ) === "checkbox" || element.attr( "type" ) === "radio" ) {
+                    // this would append the label after all your checkboxes/labels (so the error-label will be the last element in <div class="controls"> )
+          			element.parent().append( label ); 
+                }
+      			else {
+                    // standard behaviour
+          			label.insertAfter( element ); 
+                }
+            }
+		});
+
+		// Register Form Submission
+		$("#register-form").submit(function() {
+  			remove_loading($(this));
+  			if (male.checked)
+  			    last_name = 'M';
+            else
+                last_name = 'F';
+			
+			if(options['useAJAX'] == false) {
+				// Dummy AJAX request (Replace this with your AJAX code)
+      			dummy_submit_form($(this));
+			
+                // Cancel the normal submission.
+      			return false;
+			}
+		});
+
+
+		// Loading
+		//----------------------------------------------
+		function remove_loading($form) {
+            $form.find('[type=submit]').removeClass('error success');
+            $form.find('.login-form-main-message').removeClass('show error success').html('');
+		}
+
+		function form_loading($form) {
+            $form.find('[type=submit]').addClass('clicked').html(options['btn-loading']);
+		}
+
+		function form_success($form) {
+            $form.find('[type=submit]').addClass('success').html(options['btn-success']);
+            $form.find('.login-form-main-message').addClass('show success').html(options['msg-success']);
+		}
+
+		function form_failed($form) {
+            $form.find('[type=submit]').addClass('error').html(options['btn-error']);
+            $form.find('.login-form-main-message').addClass('show error').html(options['msg-error']);
+		}
+
+		// Dummy Submit Form (Remove this)
+		//----------------------------------------------
+		// This is just a dummy form submission. You should use your AJAX function or remove this function if you are not using AJAX.
+		function dummy_submit_form($form) {
+  			if($form.valid()) {
+      			form_loading($form);
+                
+      			setTimeout(function() {
+          			form_success($form);
+                }, 2000);
+            }
+		}
+		
+	})(jQuery);
+      
+    </script>
+</body>
+</html>
